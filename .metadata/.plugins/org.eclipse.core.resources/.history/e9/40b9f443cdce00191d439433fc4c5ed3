@@ -1,0 +1,85 @@
+package com.demo.bankapp.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.demo.bankapp.dao.UserDAO;
+import com.demo.bankapp.model.User;
+
+@RestController
+@RequestMapping("/bank")
+public class UserController {
+	
+	@Autowired
+	UserDAO userDAO;
+	
+	@PostMapping("/users")
+	public User createUser(@Valid @RequestBody User usr) {
+		User alreadyUser = userDAO.findOne(usr.getAccountNo());
+		if(alreadyUser!=null) {
+			return null;
+		}
+		return userDAO.save(usr);
+	}
+	
+	@GetMapping("/users")
+	public List<User> getAllUsers(){
+		return userDAO.findAll();
+	}
+	
+	@GetMapping("/users/{id}")
+	public ResponseEntity<User> getUserById(@PathVariable(value="id") Long usrId){
+		User usr = userDAO.findOne(usrId);
+		
+		if(usr==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok().body(usr);
+	}
+	
+	@PutMapping("/users/{id}")
+	public ResponseEntity<User> updateUser(@PathVariable(value="id") Long usrId, @Valid @RequestBody User usrDetails){
+		User usr = userDAO.findOne(usrId);
+		
+		if(usr==null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		usr.setAccountNo(usrDetails.getAccountNo());
+		usr.setName(usrDetails.getName());
+		
+		User updateUser = userDAO.save(usr);
+		
+		return ResponseEntity.ok().body(updateUser);
+	}
+	
+	@DeleteMapping("/users/{id}")
+	public ResponseEntity<User> deleteUser(@PathVariable(value="id") Long usrId){
+		User usr = userDAO.findOne(usrId);
+		
+		if(usr==null) {
+			return ResponseEntity.notFounds().build();
+		}
+		userDAO.delete(usr);
+		return ResponseEntity.ok().build(); 
+	}
+	
+//	@GetMapping("/hello")
+//	public String fristPage() {
+//		return "Hello world";
+//	}
+
+	
+}

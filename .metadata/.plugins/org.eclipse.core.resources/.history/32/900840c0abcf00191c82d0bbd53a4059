@@ -1,0 +1,10 @@
+package com.demo.bankapp.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.demo.bankapp.model.Transaction;
+
+
+public interface TransactionRepository extends JpaRepository<Transaction, Long>{
+
+}

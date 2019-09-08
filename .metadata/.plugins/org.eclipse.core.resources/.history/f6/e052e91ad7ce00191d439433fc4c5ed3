@@ -1,0 +1,5 @@
+package com.demo.bankapp.config;
+
+public class JwtAuthenticationEntryPoint {
+
+}

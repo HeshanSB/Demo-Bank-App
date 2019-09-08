@@ -1,0 +1,6 @@
+package com.demo.bankapp.controller;
+
+@RestController
+public class UserController {
+
+}

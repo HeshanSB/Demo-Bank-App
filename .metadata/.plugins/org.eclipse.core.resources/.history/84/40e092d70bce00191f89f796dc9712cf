@@ -1,0 +1,5 @@
+package com.demo.bankapp.repository;
+
+public class AccountRepository {
+
+}

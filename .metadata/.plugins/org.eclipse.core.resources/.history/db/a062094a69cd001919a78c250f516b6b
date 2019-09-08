@@ -1,0 +1,10 @@
+package com.demo.bankapp.repository;
+
+import com.letsstartcoding.springbootrestapiexample.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+
+public interface EmployeeRepository extends JpaRepository<User, Long> {
+
+}

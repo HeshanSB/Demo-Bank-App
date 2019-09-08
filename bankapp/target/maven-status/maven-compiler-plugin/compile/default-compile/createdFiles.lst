@@ -1,0 +1,5 @@
+com\demo\bankapp\dao\UserDAO.class
+com\demo\bankapp\UserApplication.class
+com\demo\bankapp\controller\UserController.class
+com\demo\bankapp\model\User.class
+com\demo\bankapp\repository\UserRepository.class
