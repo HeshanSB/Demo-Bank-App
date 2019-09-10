@@ -46,9 +46,19 @@ public class UserController {
 		User usr = userDAO.findOne(usrId);
 		
 		if(usr==null) {
-			return ResponseEntity.notFound().build();
+			return null;
 		}
 		return ResponseEntity.ok().body(usr);
+	}
+	
+	@GetMapping("/user/{id}")
+	public String getUser(@PathVariable(value="id") Long usrId){
+		User usr = userDAO.findOne(usrId);
+		
+		if(usr==null) {
+			return "no user";
+		}
+		return "already";
 	}
 	
 	@PutMapping("/users/{id}")

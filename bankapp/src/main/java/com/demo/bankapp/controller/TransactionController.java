@@ -6,15 +6,12 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.aspectj.weaver.ast.HasAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +22,7 @@ import com.demo.bankapp.dao.UserDAO;
 import com.demo.bankapp.model.Account;
 import com.demo.bankapp.model.Transaction;
 import com.demo.bankapp.model.User;
+import com.demo.bankapp.service.Notification;
 
 @RestController
 @RequestMapping("/bank")
@@ -37,6 +35,12 @@ public class TransactionController {
 	@Autowired
 	AccountDAO accountDAO;
 	
+	@Autowired
+	UserDAO userDAO;
+	
+	@Autowired
+	private Notification notification;
+	
 	@PostMapping("/transactions")
 	public Map<String , String> createTransaction(@Valid @RequestBody Transaction trans) {
 		HashMap<String, String> map = new HashMap<>();
@@ -45,6 +49,7 @@ public class TransactionController {
 		
 		//find receiver account
 		Account receiverAccount = accountDAO.findOne(trans.getRecieverAccountNo());
+		User receiverProfile = userDAO.findOne(trans.getRecieverAccountNo());
 		
 		if(receiverAccount==null) {
 			
@@ -67,6 +72,7 @@ public class TransactionController {
 				receiverAccount.setAvailableBalance(afterReceiverBalance);
 				accountDAO.save(receiverAccount);
 				transactionDAO.save(trans);
+				notification.sendNotifcation(senderAccount.getAccountNo(), receiverProfile.getUsername(), trans.getAmount() );
 				map.put("receiver", "found");
 				map.put("amount", "ok");
 			}
@@ -81,6 +87,7 @@ public class TransactionController {
 		
 		//find receiver account
 		Account receiverAccount = accountDAO.findOne(trans.getRecieverAccountNo());
+		User receiverProfile = userDAO.findOne(trans.getRecieverAccountNo());
 		
 		if(receiverAccount==null) {
 			
@@ -140,6 +147,16 @@ public class TransactionController {
 		}
 		return ResponseEntity.ok().body(tran);
 	}
+	
+//	@GetMapping("/transactions/mail")
+//	public String sendEmail() {
+//		try {
+//			notification.sendNotifcation();
+//		}catch(MailException e) {
+//			System.out.println(e);
+//		}
+//		return "email sent";
+//	}
 	
 //	@PostMapping("/transactions/money/{id}")
 //	public Map<String, String>

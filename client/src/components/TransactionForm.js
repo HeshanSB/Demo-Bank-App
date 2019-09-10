@@ -13,7 +13,9 @@ class TransactionForm extends Component{
             amount:'',
             password:'',
             recieverBranch:'',
-            name:''
+            name:'',
+            recieverName:'',
+            enterBranch:''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -43,20 +45,40 @@ class TransactionForm extends Component{
             amount: this.state.amount
         }
         console.log(transcateData)
-        Axios.post("http://localhost:8080/bank/transactions", transcateData, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
+        Axios.get('http://localhost:8080/bank/users/'+this.state.recieverAccountNo, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
         .then(res=>{
-            if(res.data.receiver=="not Found"){
-                swal ( "Oops" , "There is no account number" ,  "error"  )
+            this.state.recieverName=res.data.name
+            this.state.enterBranch=res.data.branch
+            if(this.state.recieverBranch!=this.state.enterBranch){
+                swal ( "Oops" , "Please enter correct branch!!" ,  "error"  )
             }
-            else if(res.data.amount=="less amount"){
-                swal ( "Oops" , "Available balance is less" ,  "error"  )
+            else if(this.state.name!=this.state.recieverName){
+                swal ( "Oops" , "Name is incorrect!!" ,  "error"  )
             }
-            else if(res.data.amount=="ok" && res.data.receiver=="found")
-                swal("Good job!" , "You have succesfully sent money!" , "success")
+            else if(this.state.amount >100000){
+                swal ( "Oops" , "Can't sent more than LKR.100000 " ,  "error"  )
+            }
+            else if(this.state.amount<=0){
+                swal ( "Oops" , "Amount can't be zero or less than zero" ,  "error"  )
+            }
+            else{
+                Axios.post("http://localhost:8080/bank/transactions", transcateData, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
+                .then(res=>{
+                    if(res.data.receiver=="not Found"){
+                        swal ( "Oops" , "There is no account number" ,  "error"  )
+                    }
+                    else if(res.data.amount=="less amount"){
+                        swal ( "Oops" , "Available balance is less" ,  "error"  )
+                    }
+                    else if(res.data.amount=="ok" && res.data.receiver=="found")
+                        swal("Good job!" , "You have succesfully sent money!" , "success")
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
+            }
         })
-        .catch(error=>{
-            console.log(error)
-        })
+        
     }
 
     render(){
@@ -110,7 +132,7 @@ class TransactionForm extends Component{
                                         success="right" />
                                     <MDBInput 
                                         required
-                                        label="Sending Amount"  
+                                        label="Sending Amount (maximum amount can be send : LKR.100000)"  
                                         className="w-75 p-3"
                                         name="amount"
                                         onChange={this.onChange}

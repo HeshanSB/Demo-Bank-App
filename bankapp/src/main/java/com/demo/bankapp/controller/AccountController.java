@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.bankapp.dao.AccountDAO;
 import com.demo.bankapp.model.Account;
-import com.demo.bankapp.model.User;
+
 
 @RestController
 @RequestMapping("/bank")

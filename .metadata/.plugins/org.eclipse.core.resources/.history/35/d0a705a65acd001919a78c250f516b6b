@@ -1,9 +1,0 @@
-package com.demo.bankapp.model;
-
-import javax.persistence.Entity;
-
-@Entity
-@Table(name="Users")
-public class User {
-
-}

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: bankapp Maven Webapp
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Heshan
+Built-By: heshan_b
 Implementation-Vendor-Id: com.demo
 Build-Jdk: 1.8.0_221
 Implementation-URL: http://maven.apache.org

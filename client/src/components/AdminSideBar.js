@@ -46,7 +46,7 @@ class AdminSideBar extends Component{
                     }
                 }}
                 onToggle={(expanded)=>{
-                    if(expanded==true){
+                    if(expanded===true){
                         this.state.navbarPadding=1;
                         console.log(this.state.navbarPadding);
                     }
@@ -91,7 +91,7 @@ class AdminSideBar extends Component{
                             <i className="fa fa-fw fa-users" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                           ADD
+                           Accounts
                         </NavText>
                     </NavItem>
                 </SideNav.Nav>

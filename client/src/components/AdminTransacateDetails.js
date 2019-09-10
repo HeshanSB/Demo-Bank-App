@@ -1,5 +1,5 @@
 import React,{Component } from "react";
-import {MDBCard, MDBCardBody} from 'mdbreact';
+import {MDBInput, MDBCard, MDBCardBody} from 'mdbreact';
 import { Label, Table } from 'semantic-ui-react';
 import Axios from 'axios';
 import jwt_decode from 'jwt-decode';
@@ -9,8 +9,10 @@ class AdminTransacateDetails extends Component{
     constructor(props){
         super(props)
         this.state={
-            transDetails:[]
+            transDetails:[],
+            search:""
         }
+        this.onChange = this.onChange.bind(this)
     }
 
     componentDidMount(){
@@ -27,16 +29,46 @@ class AdminTransacateDetails extends Component{
             console.log(error);
         });
     }
+    renderTrans(trans){
+        return (
+                <Table.Row>
+                    <Table.Cell>{trans.id}</Table.Cell>
+                    <Table.Cell>{trans.senderAccountNo==1000 ? "Bank" : trans.senderAccountNo}</Table.Cell>
+                    <Table.Cell>{trans.recieverAccountNo}</Table.Cell>
+                    <Table.Cell>{trans.amount}</Table.Cell>
+                </Table.Row>
+        );
+      };
+
+    onChange(e){
+        this.setState({ search : e.target.value})
+    }
 
     render(){
-        const{transDetails} = this.state
+        const{transDetails, search} = this.state
+        const filteredTrans = transDetails.filter(trans=>{
+            return trans.senderAccountNo.toString().indexOf(search) !==-1 || trans.recieverAccountNo.toString().indexOf(search)!==-1
+        })
         return(
             <div>
-                <div className="container pt-5">
+                <div className="container pt-5 pb-5">
                     <div className="row">
                         <MDBCard className="w-100 p-3">
                             <MDBCardBody >
                                 <p className="h4 text-center py-4">Transaction Details</p>
+                                <MDBInput 
+                                        required
+                                        label="Search"  
+                                        className="w-25 p-3"
+                                        name="search"
+                                        value = {this.state.search}
+                                        onChange = {this.onChange}
+
+                                        group 
+                                        type="text"
+                                        validate
+                                        error="wrong"
+                                        success="right" />
                                 <Table celled>
                                     <Table.Header>
                                         <Table.Row>
@@ -47,14 +79,17 @@ class AdminTransacateDetails extends Component{
                                         </Table.Row>
                                     </Table.Header>
                                     <Table.Body>
-                                        {transDetails.map(transDetails=>
+                                    {filteredTrans.map(trans => {
+                                        return this.renderTrans(trans);
+                                    })}
+                                        {/* {transDetails.map(transDetails=>
                                             <Table.Row>
                                                 <Table.Cell>{transDetails.id}</Table.Cell>
                                                 <Table.Cell>{transDetails.senderAccountNo==1000 ? "Bank" : transDetails.senderAccountNo}</Table.Cell>
                                                 <Table.Cell>{transDetails.recieverAccountNo}</Table.Cell>
                                                 <Table.Cell>{transDetails.amount}</Table.Cell>
                                              </Table.Row>
-                                            )}
+                                            )} */}
                                     </Table.Body>
                                 </Table>
                             </MDBCardBody>

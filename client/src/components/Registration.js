@@ -14,7 +14,8 @@ class Registration extends Component{
             password:'',
             username:'',
             cpassword:'',
-            amount:''   
+            amount:'',
+            vaild:''   
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -43,45 +44,59 @@ class Registration extends Component{
             recieverAccountNo : this.state.accountNo,
             amount : this.state.amount
         }
-        if(this.state.password == this.state.cpassword)
-        {
-            Axios.post("http://localhost:8080/register", userData)
-            .then(res=>{
-                Axios.post("http://localhost:8080/bank/accounts", accountData, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
-                .then(res=>{
-                    Axios.post("http://localhost:8080/bank/transactions/admin", transData, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
-                    .then(res=>{
-                        swal({
-                            title: "Good job!",
-                            text: "You have succesfully created account!",
-                            icon: "success",
-                        });
-                    })
-                    .catch(err=>{
-                        swal ( "Oops" , "Error1" ,  "error"  )
-                        console.log(err)
-                    })
-                })
-                .catch(err=>{
-                    swal ( "Oops" , "error1" ,  "error"  )
-                    console.log(err)
-                })
-            })
-            .catch(err=>{
-                swal ( "Oops" , "Email used before" ,  "error"  )
-                console.log(err)
-            })
-        }else{
-            swal ( "Oops" , "Confrim password not match to password" ,  "error"  )
-        }
+        Axios.get("http://localhost:8080/bank/user/"+this.state.accountNo, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
+        .then(res=>{
+                if(res.data=="no user"){
+                    if(this.state.password == this.state.cpassword && this.state.amount>0 && this.state.password.length>=6)
+                    {
+                        Axios.post("http://localhost:8080/register", userData)
+                        .then(res=>{
+                            Axios.post("http://localhost:8080/bank/accounts", accountData, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
+                            .then(res=>{
+                                Axios.post("http://localhost:8080/bank/transactions/admin", transData, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
+                                .then(res=>{
+                                    swal({
+                                        title: "Good job!",
+                                        text: "You have succesfully created account!",
+                                        icon: "success",
+                                    });
+                                })
+                                .catch(err=>{
+                                    swal ( "Oops" , "Error1" ,  "error"  )
+                                    console.log(err)
+                                })
+                            })
+                            .catch(err=>{
+                                swal ( "Oops" , "error1" ,  "error"  )
+                                console.log(err)
+                            })
+                        })
+                        .catch(err=>{
+                            swal ( "Oops" , "Email used before" ,  "error"  )
+                            console.log(err)
+                        })
+                    }else if(this.state.cpassword != this.state.password){
+                        swal ( "Oops" , "Confrim password not match to password" ,  "error"  )
+                    }
+                    else if(this.state.amount<=0){
+                        swal ( "Oops" , "Amount can't be zero or less than zero" ,  "error"  )
+                    }else if(this.state.password.length<6){
+                        swal ( "Oops" , "Password should be more than or equal 6 letters" ,  "error"  )
+                    }
 
+                }
+                else{
+                    swal ( "Oops" , "Account no already used" ,  "error"  )
+                }
+        })
+        
     }
 
     render(){
 
         return(
             <div>
-                <div className="container pt-5">
+                <div className="container pt-5 pb-5">
                     <div className="row">
                         <MDBCard className="w-75 p-3">
                             <MDBCardBody >

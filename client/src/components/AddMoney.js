@@ -10,7 +10,9 @@ class AddMoney extends Component{
             accountNo:'',
             branch:'',
             name:'',
-            amount:''
+            amount:'',
+            recieverName:'',
+            enterBranch:''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -25,19 +27,38 @@ class AddMoney extends Component{
             recieverAccountNo : this.state.accountNo,
             amount : this.state.amount
         }
-        Axios.post("http://localhost:8080/bank/transactions/trans", transData, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
+        Axios.get('http://localhost:8080/bank/users/'+this.state.accountNo, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
         .then(res=>{
-            swal({
-                title: "Good job!",
-                text: "You have succesfully added money!",
-                icon: "success",
-              });
+            this.state.recieverName=res.data.name
+            this.state.enterBranch=res.data.branch
+            if(this.state.recieverName!=this.state.name){
+                swal ( "Oops" , "Name is incorrect!!" ,  "error"  )
+                console.log(this.state.recieverName)
+            }
+            if(this.state.enterBranch!=this.state.branch){
+                swal ( "Oops" , "Please enter correct branch!!" ,  "error"  )
+            }
+            else if(this.state.amount<=0){
+                swal ( "Oops" , "Amount can't be zero or less than zero" ,  "error"  )
+            }
+            else if(this.state.recieverName==this.state.name && this.state.enterBranch==this.state.branch && this.state.amount>0){
+                Axios.post("http://localhost:8080/bank/transactions/trans", transData, {headers:{"Authorization" : `Bearer ${localStorage.getItem('jwttoken')}`}})
+                .then(res=>{
+                    swal({
+                        title: "Good job!",
+                        text: "You have succesfully added money!",
+                        icon: "success",
+                    });
+                })
+                .catch(err=>{
+                    swal ( "Oops" , "Error" ,  "error"  )
+                    console.log(err)
+                })
+            }
         })
         .catch(err=>{
-            swal ( "Oops" , "Error" ,  "error"  )
             console.log(err)
         })
-        
     }
 
     render(){
@@ -98,7 +119,7 @@ class AddMoney extends Component{
                                             onChange = {this.onChange}
 
                                             group 
-                                            type="text"
+                                            type="number"
                                             validate
                                             error="wrong"
                                             success="right" />

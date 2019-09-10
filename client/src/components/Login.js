@@ -43,10 +43,10 @@ class Login extends Component{
         icon: "success",
       });
         this.state.type = res.data.type
-        if(res.data.type=="user"){
+        if(res.data.type==="user"){
           this.props.history.push('/user')
         }
-        else if(res.data.type=="admin"){
+        else if(res.data.type==="admin"){
           this.props.history.push('/admin')
           localStorage.setItem('type', 'admin')
         }
@@ -74,7 +74,7 @@ class Login extends Component{
               <MDBCard className="w-75 p-3">
                 <MDBCardBody >
                   <form onSubmit={this.onSubmit}>
-                  <div className="form-header indigo rounded">
+                  <div className="form-header blue rounded">
                   <p className="h4 text-center py-4">Login</p>
                   </div>
                     <MDBInput 

@@ -8,7 +8,6 @@ import 'mdbreact/dist/css/mdb.css';
 import Login from './components/Login';
 import AdminSideBar from './components/AdminSideBar';
 import UserSideBar from './components/UserSideBar';
-import { ProtectedRoute } from './ProtectedRoute';
  
 class App extends Component {
   componentDidMount(){
@@ -20,7 +19,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <Switch>
-              {localStorage.getItem("isAuthenticated")=="true" && localStorage.getItem("type")=="admin" ?<Route exact path="/admin" component={AdminSideBar}/>:<Route path="/admin" component={()=> "404 NOT FOUND"}/>}
+              {localStorage.getItem("isAuthenticated")==="true" && localStorage.getItem("type")==="admin" ?<Route exact path="/admin" component={AdminSideBar}/>:<Route path="/admin" component={()=> "404 NOT FOUND"}/>}
               <Route exact path="/admin/register" component={AdminSideBar}/>
               <Route exact path="/admin/addMoney" component={AdminSideBar}/>
               <Route exact path="/admin/manageUsers" component={AdminSideBar}/>
