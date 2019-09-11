@@ -14,6 +14,10 @@ public class UserDAO {
 	@Autowired
 	UserRepository userRepository;
 	
+	public UserDAO(UserRepository userRepository2) {
+		userRepository=userRepository2;
+	}
+
 	public User save(User usr) {
 		return userRepository.save(usr);
 	}

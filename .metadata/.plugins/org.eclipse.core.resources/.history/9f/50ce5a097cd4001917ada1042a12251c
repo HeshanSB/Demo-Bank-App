@@ -1,0 +1,55 @@
+package com.demo.bankapp.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
+
+import com.demo.bankapp.dao.UserDAO;
+import com.demo.bankapp.model.User;
+import com.demo.bankapp.repository.UserRepository;
+
+class UserDAOTest {
+	
+	@Mock
+	UserRepository userRepository;
+	
+	@InjectMocks
+	UserDAO userDao;
+	
+	@BeforeEach
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	} 
+	
+	@Test
+	public void getAllUsers() {
+		List<User> list = new ArrayList<User>();
+		User user = new User();
+		list.add(user);
+		
+		when(userDao.findAll()).thenReturn(list);
+		
+		List<User> usr = userDao.findAll();
+		assertEquals(usr.size(), 1);
+		verify(userRepository, times(1)).findAll();
+	}
+	
+//	@Test
+//	public void saveUser() {
+//		
+//	}
+	
+	
+
+}

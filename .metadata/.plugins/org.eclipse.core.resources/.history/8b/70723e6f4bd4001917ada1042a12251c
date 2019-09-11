@@ -1,0 +1,28 @@
+package com.demo.bankapp.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Before;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.demo.bankapp.model.User;
+
+class UserTest {
+
+	User user;
+	
+	@Before
+	public void setUp() {
+		user = new User();
+		System.out.println("Before method");
+	}
+
+	@Test
+	void getUserAccountNo() throws Exception {
+		String name = "Heshan";
+		user.setName(name);
+		assertEquals(name, user.getName());
+	}
+
+}

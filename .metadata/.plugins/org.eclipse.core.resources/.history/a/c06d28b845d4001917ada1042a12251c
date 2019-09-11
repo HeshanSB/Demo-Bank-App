@@ -1,0 +1,7 @@
+package com.demo.bankapp.test;
+
+import junit.framework.TestCase;
+
+public class User extends TestCase {
+
+}

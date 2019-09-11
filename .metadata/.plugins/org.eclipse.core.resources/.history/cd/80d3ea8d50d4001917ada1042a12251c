@@ -1,0 +1,39 @@
+package com.demo.bankapp.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.Test;
+
+import com.demo.bankapp.model.User;
+
+class UserTest {
+	
+	static User user = null;
+	@BeforeClass
+	public static void setup() {
+		user = new User();
+	}
+	
+	@AfterClass
+	public static void afterTest() {
+		user = null;
+	}
+
+	@Test
+	public void getUserAccountNo() throws Exception {
+		String name = "Heshan";
+		user.setName(name);
+		assertEquals(name, user.getName());
+	}
+	
+	@Test
+	public void getName() throws Exception{
+		Long accountNo = 4L;
+		user.setAccountNo(accountNo);
+		assertEquals(accountNo, user.getAccountNo());
+	}
+
+}

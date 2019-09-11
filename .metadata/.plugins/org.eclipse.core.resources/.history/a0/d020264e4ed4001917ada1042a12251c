@@ -1,0 +1,27 @@
+package com.demo.bankapp.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Before;
+import org.junit.jupiter.api.Test;
+
+import com.demo.bankapp.model.User;
+
+class UserTest {
+	
+//	User user;
+	
+//	@Before
+//	public void setUp() {
+//		user = new User();
+//	}
+
+	@Test
+	void getUserAccountNo() throws Exception {
+		User user = new User();
+		String name = "Heshan";
+		user.setName(name);
+		assertEquals(name, user.getName());
+	}
+
+}

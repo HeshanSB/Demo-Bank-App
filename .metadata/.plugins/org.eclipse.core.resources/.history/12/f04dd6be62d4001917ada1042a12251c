@@ -1,0 +1,53 @@
+package com.demo.bankapp.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito.*;
+
+import com.demo.bankapp.dao.UserDAO;
+import com.demo.bankapp.model.User;
+import com.demo.bankapp.repository.UserRepository;
+
+class UserDAOTest {
+	
+	UserDAO userDao;
+	
+	@Mock
+	UserRepository userRepository;
+	
+	@BeforeEach
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+		userDao = new UserDAO(userRepository);
+	}
+
+	@Test
+	public void getUsers() throws Exception {
+	
+//		when(userDao.findAll()).thenReturn(userData);
+		List<User> users = userDao.findAll();
+		assertEquals(users.size(), 0);
+	}
+	
+//	@Test
+//	public void saveUser() throws Exception{
+//		User user = new User();
+//		user.setAccountNo(4L);
+//		user.setName("Heshan");
+//		user.setBranch("Athurugiriya");
+//		user.setPassword("password");
+//		user.setType("user");
+//		user.setNicNo("951121088v");
+//		
+//		
+//	}
+
+}

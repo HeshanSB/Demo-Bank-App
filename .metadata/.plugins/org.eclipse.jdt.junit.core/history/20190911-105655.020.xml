@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="UserTest" project="bankapp" tests="7" started="7" failures="0" errors="0" ignored="0">
+  <testsuite name="com.demo.bankapp.test.UserTest" time="0.018" displayname="UserTest" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.UserTest]">
+    <testcase name="getPassword" classname="com.demo.bankapp.test.UserTest" time="0.007" displayname="getPassword()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.UserTest]/[method:getPassword()]"/>
+    <testcase name="getUserAccountNo" classname="com.demo.bankapp.test.UserTest" time="0.001" displayname="getUserAccountNo()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.UserTest]/[method:getUserAccountNo()]"/>
+    <testcase name="getName" classname="com.demo.bankapp.test.UserTest" time="0.001" displayname="getName()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.UserTest]/[method:getName()]"/>
+    <testcase name="getType" classname="com.demo.bankapp.test.UserTest" time="0.001" displayname="getType()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.UserTest]/[method:getType()]"/>
+    <testcase name="getBranch" classname="com.demo.bankapp.test.UserTest" time="0.001" displayname="getBranch()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.UserTest]/[method:getBranch()]"/>
+    <testcase name="getUsername" classname="com.demo.bankapp.test.UserTest" time="0.001" displayname="getUsername()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.UserTest]/[method:getUsername()]"/>
+    <testcase name="getNicNo" classname="com.demo.bankapp.test.UserTest" time="0.006" displayname="getNicNo()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.UserTest]/[method:getNicNo()]"/>
+  </testsuite>
+</testrun>

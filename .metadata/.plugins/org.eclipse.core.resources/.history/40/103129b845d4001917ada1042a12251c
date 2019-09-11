@@ -1,0 +1,10 @@
+package com.demo.bankapp.test;
+
+import junit.framework.TestCase;
+
+public class User extends TestCase {
+	@Test 
+	public void testGetName() {
+		Us
+	}
+}
