@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="AccountTest" project="bankapp" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="com.demo.bankapp.test.AccountTest" time="0.002" displayname="AccountTest" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.AccountTest]">
-    <testcase name="getUserAccountNo" classname="com.demo.bankapp.test.AccountTest" time="0.0" displayname="getUserAccountNo()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.AccountTest]/[method:getUserAccountNo()]"/>
-    <testcase name="getAvailableBalance" classname="com.demo.bankapp.test.AccountTest" time="0.002" displayname="getAvailableBalance()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.AccountTest]/[method:getAvailableBalance()]"/>
-  </testsuite>
-</testrun>

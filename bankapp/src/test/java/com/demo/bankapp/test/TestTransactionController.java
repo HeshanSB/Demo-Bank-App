@@ -1,0 +1,38 @@
+package com.demo.bankapp.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.http.MediaType;
+
+import com.demo.bankapp.controller.TransactionController;
+
+@RunWith(SpringRunner.class)
+@WebMvcTest(TransactionController.class)
+class TestTransactionController {
+	
+	@Autowired
+	private MockMvc mvc;
+	
+	@Test
+	public void getAllTrans()throws Exception {
+		mvc.perform( MockMvcRequestBuilders
+				.get("/transactions")
+				.accept(MediaType.APPLICATION_JSON))
+		.andDo(MockMvcResultHandlers.print())
+		.andExpect(status().isOk())
+	     .andExpect(MockMvcResultMatchers.jsonPath("$.transactions").exists())
+	     .andExpect(MockMvcResultMatchers.jsonPath("$.transactions.transactionId").isNotEmpty());	
+	}
+
+}

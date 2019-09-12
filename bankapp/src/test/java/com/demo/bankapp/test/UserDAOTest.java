@@ -27,15 +27,23 @@ class UserDAOTest {
 	@InjectMocks
 	UserDAO userDao;
 	
+	User user;
+	
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
+		user = new User();
+		user.setAccountNo(4L);
+		user.setBranch("Athurugiriya");
+		user.setName("Heshan");
+		user.setNicNo("951121088v");
+		user.setPassword("password");
+		user.setUsername("heshan@gmail.com");
 	} 
 	
 	@Test
 	public void getAllUsers() {
 		List<User> list = new ArrayList<User>();
-		User user = new User();
 		list.add(user);
 		
 		when(userDao.findAll()).thenReturn(list);
@@ -47,29 +55,15 @@ class UserDAOTest {
 	
 	@Test
 	public void saveUser() {
-		User user = new User();
-		user.setAccountNo(4L);
-		user.setBranch("Athurugiriya");
-		user.setName("Heshan");
-		user.setNicNo("951121088v");
-		user.setPassword("password");
-		user.setUsername("heshan@gmail.com");
-		
 		userDao.save(user);
 		verify(userRepository, times(1)).save(user);
 	}
 	
 	@Test
 	public void getUserById() {
-		User user = new User();
-		user.setAccountNo(4L);
-		user.setBranch("Athurugiriya");
-		user.setName("Heshan");
-		user.setNicNo("951121088v");
-		user.setPassword("password");
-		user.setUsername("heshan@gmail.com");
 		
 		when(userDao.findOne(4L)).thenReturn(user);
+		
 		
 		User usr = userDao.findOne(4L);
 		
@@ -79,13 +73,6 @@ class UserDAOTest {
 	
 	@Test
 	public void getByUserName() {
-		User user = new User();
-		user.setAccountNo(4L);
-		user.setBranch("Athurugiriya");
-		user.setName("Heshan");
-		user.setNicNo("951121088v");
-		user.setPassword("password");
-		user.setUsername("heshan@gmail.com");
 		
 		when(userDao.findByUserName("heshan@gmail.com")).thenReturn(user);
 		

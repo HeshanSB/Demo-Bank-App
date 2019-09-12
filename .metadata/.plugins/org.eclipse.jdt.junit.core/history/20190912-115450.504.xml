@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AccountDAOTest" project="bankapp" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.demo.bankapp.test.AccountDAOTest" time="0.126" displayname="AccountDAOTest" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.AccountDAOTest]">
+    <testcase name="saveAccount" classname="com.demo.bankapp.test.AccountDAOTest" time="0.111" displayname="saveAccount()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.AccountDAOTest]/[method:saveAccount()]"/>
+    <testcase name="getAccountById" classname="com.demo.bankapp.test.AccountDAOTest" time="0.008" displayname="getAccountById()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.AccountDAOTest]/[method:getAccountById()]"/>
+    <testcase name="getAllAccounts" classname="com.demo.bankapp.test.AccountDAOTest" time="0.007" displayname="getAllAccounts()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.AccountDAOTest]/[method:getAllAccounts()]"/>
+  </testsuite>
+</testrun>

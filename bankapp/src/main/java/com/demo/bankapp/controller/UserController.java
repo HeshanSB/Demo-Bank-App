@@ -96,5 +96,10 @@ public class UserController {
 		}
 		return ResponseEntity.ok().body(user);
 	}
+	
+	@GetMapping("/hello")
+	public String helloController() {
+		return "Hello world";
+	}
 		
 }

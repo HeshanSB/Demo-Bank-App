@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TransactionDAOTest" project="bankapp" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="com.demo.bankapp.test.TransactionDAOTest" time="0.118" displayname="TransactionDAOTest" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.TransactionDAOTest]">
+    <testcase name="getAllTrans" classname="com.demo.bankapp.test.TransactionDAOTest" time="0.109" displayname="getAllTrans()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.TransactionDAOTest]/[method:getAllTrans()]"/>
+    <testcase name="getTransById" classname="com.demo.bankapp.test.TransactionDAOTest" time="0.009" displayname="getTransById()" uniqueid="[engine:junit-jupiter]/[class:com.demo.bankapp.test.TransactionDAOTest]/[method:getTransById()]"/>
+  </testsuite>
+</testrun>
